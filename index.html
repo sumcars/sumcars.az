@@ -7,30 +7,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #FFD700;
-            --premium-black: #000000;
-            --dark-gray: #121212;
-            --card-gray: #1c1c1e;
-            --text-white: #ffffff;
-            --text-muted: #8e8e93;
+            --gold: #D4AF37; /* Premium qızılı */
+            --bg-white: #ffffff; /* Ana fon */
+            --light-gray: #f8f9fa; /* Header və kart fonu */
+            --border-color: #e0e0e0; /* Sərhəd rəngi */
+            --text-dark: #1a1a1a; /* Ana mətn */
+            --text-muted: #6c757d; /* Köməkçi mətn */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
         body {
-            background-color: var(--premium-black);
-            color: var(--text-white);
-            padding-bottom: 80px; /* Alt menyu üçün boşluq */
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            padding-bottom: 80px;
         }
 
         /* Üst Panel */
         header {
-            background-color: var(--dark-gray);
+            background-color: var(--light-gray);
             padding: 10px 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-bottom: 1px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -39,12 +39,12 @@
         .header-logo {
             position: absolute;
             left: 15px;
-            height: 35px; /* Loqonun ölçüsü */
+            height: 35px;
             width: auto;
         }
 
         header h1 {
-            color: var(--gold);
+            color: var(--text-dark);
             font-weight: 800;
             letter-spacing: -1px;
             font-size: 24px;
@@ -59,11 +59,12 @@
         }
 
         .car-card {
-            background-color: var(--card-gray);
+            background-color: var(--light-gray);
             border-radius: 12px;
             overflow: hidden;
             position: relative;
-            border: 0.5px solid #333;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .car-img {
@@ -74,7 +75,7 @@
 
         .price-tag {
             background: var(--gold);
-            color: #000;
+            color: #fff;
             position: absolute;
             top: 100px;
             left: 0;
@@ -95,6 +96,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            color: var(--text-dark);
         }
 
         .car-meta {
@@ -102,17 +104,17 @@
             color: var(--text-muted);
         }
 
-        /* Alt Naviqasiya Paneli (Turbo.az stili) */
+        /* Alt Naviqasiya Paneli */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: var(--dark-gray);
+            background-color: var(--light-gray);
             display: flex;
             justify-content: space-around;
             padding: 12px 0;
-            border-top: 1px solid #333;
+            border-top: 1px solid var(--border-color);
             z-index: 2000;
         }
 
@@ -132,7 +134,7 @@
             margin-bottom: 4px;
         }
 
-        /* Elan Ver Modal (Gizli Panel) */
+        /* Elan Ver Modal */
         #add-panel {
             display: none;
             position: fixed;
@@ -140,27 +142,27 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000;
+            background: var(--bg-white);
             z-index: 3000;
             padding: 20px;
             overflow-y: auto;
         }
 
-        .close-btn { color: var(--gold); float: right; font-size: 20px; }
+        .close-btn { color: var(--gold); float: right; font-size: 20px; font-weight: bold; }
 
         input, select {
             width: 100%;
             padding: 15px;
             margin: 10px 0;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            color: #fff;
+            background: var(--light-gray);
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
             border-radius: 8px;
         }
 
         .submit-btn {
             background: var(--gold);
-            color: #000;
+            color: #fff;
             width: 100%;
             padding: 15px;
             border: none;
