@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SumCars | Yeni Elan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37; 
+            --bg-white: #ffffff; 
+            --light-gray: #f8f9fa; 
+            --border-color: #e0e0e0; 
+            --text-dark: #1a1a1a; 
+            --text-muted: #6c757d; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body { background-color: var(--bg-white); color: var(--text-dark); padding-bottom: 80px; }
+        a { text-decoration: none; }
+
+        header { background-color: var(--light-gray); padding: 15px; display: flex; align-items: center; justify-content: center; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; min-height: 70px; }
+        .header-logo { position: absolute; left: 15px; height: 50px; width: auto; }
+        header h1 { color: var(--text-dark); font-weight: 800; letter-spacing: -1px; font-size: 24px; }
+
+        .add-page-container { padding: 20px; }
+        .page-title { margin-bottom: 20px; color: var(--gold); font-size: 22px; }
+        
+        input, select { width: 100%; padding: 15px; margin: 10px 0; background: var(--light-gray); border: 1px solid var(--border-color); color: var(--text-dark); border-radius: 8px; font-size: 15px; }
+        input:focus { outline: none; border-color: var(--gold); }
+        
+        .submit-btn { background: var(--gold); color: #fff; width: 100%; padding: 16px; border: none; border-radius: 8px; font-weight: 700; font-size: 16px; margin-top: 15px; box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3); }
+
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background-color: var(--light-gray); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border-color); z-index: 2000; }
+        .nav-item { text-align: center; color: var(--text-muted); font-size: 10px; flex: 1; transition: 0.2s; }
+        .nav-item.active { color: var(--gold); transform: scale(1.05); }
+        .nav-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="LOGO.png" alt="Logo" class="header-logo">
+        <h1>SUMCARS</h1>
+    </header>
+
+    <main class="add-page-container">
+        <h2 class="page-title">Yeni Elan Yarat</h2>
+        <input type="text" placeholder="Marka və Model (məs: Mercedes C200)">
+        <input type="number" placeholder="Buraxılış ili">
+        <input type="text" placeholder="Mühərrik (məs: 2.2 L)">
+        <input type="number" placeholder="Qiymət (AZN)">
+        <input type="text" placeholder="WhatsApp nömrəsi (məs: 050XXXXXXX)">
+        <input type="url" placeholder="Şəkil linki (URL)">
+        <button class="submit-btn" onclick="alert('Elanınız yoxlanışa göndərildi!')">Elanı Yerləşdir</button>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="profil.html" class="nav-item">
+            <span class="nav-icon">👤</span>Profil
+        </a>
+        <a href="mesajlar.html" class="nav-item">
+            <span class="nav-icon">💬</span>Mesajlar
+        </a>
+        <a href="elan.html" class="nav-item active">
+            <span class="nav-icon">➕</span>Elan ver
+        </a>
+        <a href="index.html" class="nav-item">
+            <span class="nav-icon">🏠</span>Əsas
+        </a>
+    </nav>
+
+</body>
+</html>
