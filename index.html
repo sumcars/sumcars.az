@@ -20,23 +20,23 @@
         body { background-color: var(--bg-white); color: var(--text-dark); padding-bottom: 80px; }
         a { text-decoration: none; }
 
-        /* YUXARI REKLAM - HÜNDÜRLÜK ARTIRILDI VƏ AŞAĞI İTƏLƏNDİ */
+        /* YUXARI REKLAM - TAM EKRANA YAYILMASI ÜÇÜN DÜZƏLİŞ EDİLDİ */
         .top-banner {
             width: 100%;
-            height: 100px; /* Hündürlük 50px-dən 100px-ə qaldırıldı */
+            height: 100px; 
             background-color: #000;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             border-bottom: 3px solid var(--gold);
-            margin-bottom: 5px; /* Altındakı header-dən bir az məsafə */
+            margin-bottom: 5px; 
         }
 
         .top-banner img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Şəkli kəsmədən tam göstərmək üçün */
+            object-fit: cover; /* BU HİSSƏ DƏYİŞDİRİLDİ: Şəkil artıq qıraqlarda boşluq qoymayacaq */
         }
 
         /* Üst Panel (Header) */
