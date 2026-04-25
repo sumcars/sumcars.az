@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SumCars | Mesajlar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37; 
+            --bg-white: #ffffff; 
+            --light-gray: #f8f9fa; 
+            --border-color: #e0e0e0; 
+            --text-dark: #1a1a1a; 
+            --text-muted: #6c757d; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body { background-color: var(--bg-white); color: var(--text-dark); padding-bottom: 80px; }
+        a { text-decoration: none; }
+
+        header { background-color: var(--light-gray); padding: 15px; display: flex; align-items: center; justify-content: center; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; min-height: 70px; }
+        .header-logo { position: absolute; left: 15px; height: 50px; width: auto; }
+        header h1 { color: var(--text-dark); font-weight: 800; letter-spacing: -1px; font-size: 24px; }
+
+        .messages-container { padding: 15px; }
+        .message-card { background: var(--light-gray); padding: 15px; border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--border-color); display: flex; align-items: center; gap: 15px; }
+        .msg-avatar { width: 50px; height: 50px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; font-size: 20px;}
+        .msg-details { flex: 1; }
+        .msg-name { font-weight: 700; color: var(--text-dark); margin-bottom: 5px;}
+        .msg-text { font-size: 13px; color: var(--text-muted); }
+        .msg-time { font-size: 11px; color: var(--text-muted); }
+
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background-color: var(--light-gray); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border-color); z-index: 2000; }
+        .nav-item { text-align: center; color: var(--text-muted); font-size: 10px; flex: 1; transition: 0.2s; }
+        .nav-item.active { color: var(--gold); transform: scale(1.05); }
+        .nav-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="LOGO.png" alt="Logo" class="header-logo">
+        <h1>SUMCARS</h1>
+    </header>
+
+    <main class="messages-container">
+        <div class="message-card">
+            <div class="msg-avatar">M</div>
+            <div class="msg-details">
+                <div class="msg-name">Məmmədov Tural</div>
+                <div class="msg-text">Salam, maşının son qiyməti nədir?</div>
+            </div>
+            <div class="msg-time">14:20</div>
+        </div>
+        <div class="message-card">
+            <div class="msg-avatar">S</div>
+            <div class="msg-details">
+                <div class="msg-name">Samir</div>
+                <div class="msg-text">Kreditə salmaq olur qardaş?</div>
+            </div>
+            <div class="msg-time">Dünən</div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="profil.html" class="nav-item">
+            <span class="nav-icon">👤</span>Profil
+        </a>
+        <a href="mesajlar.html" class="nav-item active">
+            <span class="nav-icon">💬</span>Mesajlar
+        </a>
+        <a href="elan.html" class="nav-item">
+            <span class="nav-icon">➕</span>Elan ver
+        </a>
+        <a href="index.html" class="nav-item">
+            <span class="nav-icon">🏠</span>Əsas
+        </a>
+    </nav>
+
+</body>
+</html>
