@@ -20,25 +20,26 @@
         body { background-color: var(--bg-white); color: var(--text-dark); padding-bottom: 80px; }
         a { text-decoration: none; }
 
-        /* ƏN YUXARI NAZİK REKLAM YERİ */
+        /* YUXARI REKLAM - HÜNDÜRLÜK ARTIRILDI VƏ AŞAĞI İTƏLƏNDİ */
         .top-banner {
             width: 100%;
-            height: 50px; /* Nazik olması üçün */
+            height: 100px; /* Hündürlük 50px-dən 100px-ə qaldırıldı */
             background-color: #000;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            border-bottom: 1px solid var(--gold);
+            border-bottom: 3px solid var(--gold);
+            margin-bottom: 5px; /* Altındakı header-dən bir az məsafə */
         }
 
         .top-banner img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Şəkli panelə uyğunlaşdırır */
+            object-fit: contain; /* Şəkli kəsmədən tam göstərmək üçün */
         }
 
-        /* Üst Panel (Header) - Reklamın altına düşür */
+        /* Üst Panel (Header) */
         header {
             background-color: var(--light-gray);
             padding: 15px; 
@@ -190,15 +191,14 @@
         const totalAds = 5;
 
         setInterval(() => {
-            // Hal-hazırda aktiv olanı gizlət
-            document.getElementById(`ad${currentAd}`).classList.remove('active');
+            const currentElem = document.getElementById(`ad${currentAd}`);
+            if (currentElem) currentElem.classList.remove('active');
             
-            // Növbəti reklama keç
             currentAd = currentAd % totalAds + 1;
             
-            // Yeni reklamı göstər
-            document.getElementById(`ad${currentAd}`).classList.add('active');
-        }, 10000); // 10 saniyə
+            const nextElem = document.getElementById(`ad${currentAd}`);
+            if (nextElem) nextElem.classList.add('active');
+        }, 10000);
     </script>
 
 </body>
