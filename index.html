@@ -20,7 +20,25 @@
         body { background-color: var(--bg-white); color: var(--text-dark); padding-bottom: 80px; }
         a { text-decoration: none; }
 
-        /* Üst Panel */
+        /* ƏN YUXARI NAZİK REKLAM YERİ */
+        .top-banner {
+            width: 100%;
+            height: 50px; /* Nazik olması üçün */
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 1px solid var(--gold);
+        }
+
+        .top-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Şəkli panelə uyğunlaşdırır */
+        }
+
+        /* Üst Panel (Header) - Reklamın altına düşür */
         header {
             background-color: var(--light-gray);
             padding: 15px; 
@@ -45,11 +63,11 @@
         .car-model { font-weight: 600; font-size: 15px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-dark); }
         .car-meta { font-size: 12px; color: var(--text-muted); }
 
-        /* SOL TƏRƏFDƏ 300x300 REKLAM PƏNCƏRƏSİ */
+        /* SOLDAKI 5-Lİ REKLAM PƏNCƏRƏSİ (300x300) */
         .ad-box {
             position: fixed;
-            left: 10px;     /* Ekranın solundan məsafə */
-            bottom: 85px;   /* Alt menyudan yuxarıda durması üçün */
+            left: 10px;
+            bottom: 85px;
             width: 300px;  
             height: 300px; 
             background: var(--light-gray);
@@ -78,7 +96,6 @@
             justify-content: center;
             cursor: pointer;
             border: 3px solid white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             z-index: 3100;
         }
 
@@ -114,6 +131,10 @@
 </head>
 <body>
 
+    <div class="top-banner">
+        <img src="mainreklam.jpg" alt="Main Reklam">
+    </div>
+
     <header>
         <img src="LOGO.png" alt="Logo" class="header-logo">
         <h1>SUMCARS</h1>
@@ -142,13 +163,11 @@
     <div class="ad-box" id="mainAdBox">
         <div class="ad-close" onclick="document.getElementById('mainAdBox').style.display='none'">✖</div>
         
-        <div class="ad-content active" id="ad1">
-            <img src="reklam1.jpg" alt="Reklam 1">
-        </div>
-
-        <div class="ad-content" id="ad2">
-            <img src="reklam2.jpg" alt="Reklam 2">
-        </div>
+        <div class="ad-content active" id="ad1"><img src="reklam1.jpg"></div>
+        <div class="ad-content" id="ad2"><img src="reklam2.jpg"></div>
+        <div class="ad-content" id="ad3"><img src="reklam3.jpg"></div>
+        <div class="ad-content" id="ad4"><img src="reklam4.jpg"></div>
+        <div class="ad-content" id="ad5"><img src="reklam5.jpg"></div>
     </div>
 
     <nav class="bottom-nav">
@@ -167,20 +186,19 @@
     </nav>
 
     <script>
+        let currentAd = 1;
+        const totalAds = 5;
+
         setInterval(() => {
-            const ad1 = document.getElementById('ad1');
-            const ad2 = document.getElementById('ad2');
+            // Hal-hazırda aktiv olanı gizlət
+            document.getElementById(`ad${currentAd}`).classList.remove('active');
             
-            if (ad1 && ad2) {
-                if (ad1.classList.contains('active')) {
-                    ad1.classList.remove('active');
-                    ad2.classList.add('active');
-                } else {
-                    ad2.classList.remove('active');
-                    ad1.classList.add('active');
-                }
-            }
-        }, 10000); 
+            // Növbəti reklama keç
+            currentAd = currentAd % totalAds + 1;
+            
+            // Yeni reklamı göstər
+            document.getElementById(`ad${currentAd}`).classList.add('active');
+        }, 10000); // 10 saniyə
     </script>
 
 </body>
