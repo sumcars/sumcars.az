@@ -26,12 +26,21 @@
         /* Üst Panel */
         header {
             background-color: var(--dark-gray);
-            padding: 15px;
-            text-align: center;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-bottom: 1px solid var(--gold);
             position: sticky;
             top: 0;
             z-index: 1000;
+        }
+
+        .header-logo {
+            position: absolute;
+            left: 15px;
+            height: 35px; /* Loqonun ölçüsü */
+            width: auto;
         }
 
         header h1 {
@@ -164,6 +173,7 @@
 <body>
 
     <header>
+        <img src="LOGO.png" alt="Logo" class="header-logo">
         <h1>SUMCARS</h1>
     </header>
 
