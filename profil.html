@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SumCars | Profil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37; 
+            --bg-white: #ffffff; 
+            --light-gray: #f8f9fa; 
+            --border-color: #e0e0e0; 
+            --text-dark: #1a1a1a; 
+            --text-muted: #6c757d; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body { background-color: var(--bg-white); color: var(--text-dark); padding-bottom: 80px; }
+        a { text-decoration: none; }
+
+        header { background-color: var(--light-gray); padding: 15px; display: flex; align-items: center; justify-content: center; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; min-height: 70px; }
+        .header-logo { position: absolute; left: 15px; height: 50px; width: auto; }
+        header h1 { color: var(--text-dark); font-weight: 800; letter-spacing: -1px; font-size: 24px; }
+
+        .profile-header { text-align: center; padding: 30px 15px; background: var(--light-gray); border-bottom: 1px solid var(--border-color); border-radius: 0 0 20px 20px; margin-bottom: 20px; }
+        .profile-avatar { width: 80px; height: 80px; background: var(--gold); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 35px; color: #fff; margin-bottom: 10px; }
+        .profile-name { font-size: 20px; font-weight: 800; color: var(--text-dark); }
+        .profile-stats { color: var(--text-muted); font-size: 14px; margin-top: 5px; }
+        
+        .profile-menu { padding: 0 15px; }
+        .profile-menu-item { background: var(--light-gray); padding: 16px; border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--border-color); font-weight: 600; display: flex; justify-content: space-between; align-items: center; color: var(--text-dark); transition: 0.2s; }
+        .profile-menu-item:active { background: #e9ecef; }
+        .logout { color: #dc3545; }
+
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background-color: var(--light-gray); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border-color); z-index: 2000; }
+        .nav-item { text-align: center; color: var(--text-muted); font-size: 10px; flex: 1; transition: 0.2s; }
+        .nav-item.active { color: var(--gold); transform: scale(1.05); }
+        .nav-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="LOGO.png" alt="Logo" class="header-logo">
+        <h1>SUMCARS</h1>
+    </header>
+
+    <main>
+        <div class="profile-header">
+            <div class="profile-avatar">S</div>
+            <div class="profile-name">Sumqayıt İstifadəçisi</div>
+            <div class="profile-stats">Aktiv elanlar: 2</div>
+        </div>
+
+        <div class="profile-menu">
+            <a href="#" class="profile-menu-item">Mənim Elanlarım <span>➔</span></a>
+            <a href="#" class="profile-menu-item">Seçilmişlər <span>➔</span></a>
+            <a href="#" class="profile-menu-item">Tənzimləmələr <span>➔</span></a>
+            <a href="#" class="profile-menu-item logout">Hesabdan Çıx <span>➔</span></a>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="profil.html" class="nav-item active">
+            <span class="nav-icon">👤</span>Profil
+        </a>
+        <a href="mesajlar.html" class="nav-item">
+            <span class="nav-icon">💬</span>Mesajlar
+        </a>
+        <a href="elan.html" class="nav-item">
+            <span class="nav-icon">➕</span>Elan ver
+        </a>
+        <a href="index.html" class="nav-item">
+            <span class="nav-icon">🏠</span>Əsas
+        </a>
+    </nav>
+
+</body>
+</html>
