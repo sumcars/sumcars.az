@@ -7,12 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #D4AF37; /* Premium qızılı */
-            --bg-white: #ffffff; /* Ana fon */
-            --light-gray: #f8f9fa; /* Header və kart fonu */
-            --border-color: #e0e0e0; /* Sərhəd rəngi */
-            --text-dark: #1a1a1a; /* Ana mətn */
-            --text-muted: #6c757d; /* Köməkçi mətn */
+            --gold: #D4AF37; 
+            --bg-white: #ffffff; 
+            --light-gray: #f8f9fa; 
+            --border-color: #e0e0e0; 
+            --text-dark: #1a1a1a; 
+            --text-muted: #6c757d; 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
@@ -26,7 +26,7 @@
         /* Üst Panel */
         header {
             background-color: var(--light-gray);
-            padding: 10px 15px;
+            padding: 15px; /* Boşluğu bir az artırdım */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -34,12 +34,13 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            min-height: 70px; /* Header hündürlüyü loqoya görə artdı */
         }
 
         .header-logo {
             position: absolute;
             left: 15px;
-            height: 35px;
+            height: 50px; /* Loqo ölçüsü boyüdü */
             width: auto;
         }
 
