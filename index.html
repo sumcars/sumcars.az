@@ -45,6 +45,48 @@
         .car-model { font-weight: 600; font-size: 15px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-dark); }
         .car-meta { font-size: 12px; color: var(--text-muted); }
 
+        /* Reklam Pəncərəsi */
+        .ad-box {
+            position: fixed;
+            left: 10px;
+            bottom: 85px;
+            width: 150px;
+            background: var(--light-gray);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 1500;
+            text-align: center;
+        }
+
+        .ad-close {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--gold);
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid white;
+        }
+
+        .ad-content { display: none; animation: adFade 0.5s ease-in-out; }
+        .ad-content.active { display: block; }
+
+        @keyframes adFade {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ad-content img { width: 100%; border-radius: 5px; margin-bottom: 5px; }
+
         /* Alt Naviqasiya Paneli */
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background-color: var(--light-gray); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border-color); z-index: 2000; }
         .nav-item { text-align: center; color: var(--text-muted); font-size: 10px; flex: 1; transition: 0.2s; }
@@ -79,6 +121,18 @@
         </div>
     </main>
 
+    <div class="ad-box" id="mainAdBox">
+        <div class="ad-close" onclick="document.getElementById('mainAdBox').style.display='none'">✖</div>
+        
+        <div class="ad-content active" id="ad1">
+            <img src="reklam1.jpg" alt="Reklam 1">
+        </div>
+
+        <div class="ad-content" id="ad2">
+            <img src="reklam2.jpg" alt="Reklam 2">
+        </div>
+    </div>
+
     <nav class="bottom-nav">
         <a href="profil.html" class="nav-item">
             <span class="nav-icon">👤</span>Profil
@@ -93,6 +147,22 @@
             <span class="nav-icon">🏠</span>Əsas
         </a>
     </nav>
+
+    <script>
+        // 10 saniyədən bir şəkilləri dəyişən kod
+        setInterval(() => {
+            const ad1 = document.getElementById('ad1');
+            const ad2 = document.getElementById('ad2');
+            
+            if (ad1.classList.contains('active')) {
+                ad1.classList.remove('active');
+                ad2.classList.add('active');
+            } else {
+                ad2.classList.remove('active');
+                ad1.classList.add('active');
+            }
+        }, 10000); // 10 saniyə
+    </script>
 
 </body>
 </html>
