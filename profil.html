@@ -16,26 +16,59 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-
         body { background-color: var(--bg-white); color: var(--text-dark); padding-bottom: 80px; }
         a { text-decoration: none; }
 
-        header { background-color: var(--light-gray); padding: 15px; display: flex; align-items: center; justify-content: center; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; min-height: 70px; }
-        .header-logo { position: absolute; left: 15px; height: 50px; width: auto; }
+        header {
+            background-color: var(--light-gray);
+            padding: 15px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            min-height: 70px;
+        }
         header h1 { color: var(--text-dark); font-weight: 800; letter-spacing: -1px; font-size: 24px; }
 
-        .profile-header { text-align: center; padding: 30px 15px; background: var(--light-gray); border-bottom: 1px solid var(--border-color); border-radius: 0 0 20px 20px; margin-bottom: 20px; }
-        .profile-avatar { width: 80px; height: 80px; background: var(--gold); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 35px; color: #fff; margin-bottom: 10px; }
-        .profile-name { font-size: 20px; font-weight: 800; color: var(--text-dark); }
-        .profile-stats { color: var(--text-muted); font-size: 14px; margin-top: 5px; }
+        .auth-container { padding: 20px; max-width: 400px; margin: 40px auto; }
+        .auth-box {
+            background-color: var(--light-gray);
+            padding: 25px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .auth-title { text-align: center; font-size: 22px; font-weight: 800; margin-bottom: 20px; }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: var(--text-muted); }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 15px; outline: none; }
+        .input-group input:focus { border-color: var(--gold); }
+
+        .auth-btn {
+            width: 100%; background-color: var(--text-dark); color: #fff; padding: 14px;
+            border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 10px;
+        }
         
-        .profile-menu { padding: 0 15px; }
-        .profile-menu-item { background: var(--light-gray); padding: 16px; border-radius: 12px; margin-bottom: 10px; border: 1px solid var(--border-color); font-weight: 600; display: flex; justify-content: space-between; align-items: center; color: var(--text-dark); transition: 0.2s; }
-        .profile-menu-item:active { background: #e9ecef; }
-        .logout { color: #dc3545; }
+        .google-btn {
+            width: 100%; background-color: #fff; color: #1a1a1a; padding: 12px;
+            border: 1px solid var(--border-color); border-radius: 8px; font-size: 15px; font-weight: 600;
+            cursor: pointer; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+
+        .auth-switch { text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted); }
+        .auth-switch span { color: var(--gold); font-weight: 600; cursor: pointer; }
+
+        /* Profil Ekranı */
+        .profile-box { background-color: var(--light-gray); padding: 30px 20px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; }
+        .profile-avatar { width: 80px; height: 80px; background-color: var(--gold); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 15px; font-weight: bold; }
+        .logout-btn { background-color: #ff4d4d; color: white; margin-top: 20px; }
 
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background-color: var(--light-gray); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border-color); z-index: 2000; }
-        .nav-item { text-align: center; color: var(--text-muted); font-size: 10px; flex: 1; transition: 0.2s; }
+        .nav-item { text-align: center; color: var(--text-muted); font-size: 10px; flex: 1; }
         .nav-item.active { color: var(--gold); transform: scale(1.05); }
         .nav-icon { font-size: 20px; display: block; margin-bottom: 4px; }
     </style>
@@ -43,39 +76,148 @@
 <body>
 
     <header>
-        <img src="LOGO.png" alt="Logo" class="header-logo">
         <h1>SUMCARS</h1>
     </header>
 
-    <main>
-        <div class="profile-header">
-            <div class="profile-avatar">S</div>
-            <div class="profile-name">Sumqayıt İstifadəçisi</div>
-            <div class="profile-stats">Aktiv elanlar: 2</div>
+    <main class="auth-container">
+        <div class="auth-box" id="loginForm">
+            <h2 class="auth-title">Daxil Ol</h2>
+            <div class="input-group">
+                <label>E-poçt</label>
+                <input type="email" id="loginEmail" placeholder="ad@mail.com">
+            </div>
+            <div class="input-group">
+                <label>Şifrə</label>
+                <input type="password" id="loginPassword" placeholder="Şifrəniz">
+            </div>
+            <button class="auth-btn" id="btnToLogin">Giriş</button>
+            
+            <button class="google-btn" id="btnGoogleLogin">
+                🌐 Google ilə Giriş
+            </button>
+
+            <div class="auth-switch">
+                Hesabınız yoxdur? <span onclick="toggleAuth()">Qeydiyyatdan keçin</span>
+            </div>
         </div>
 
-        <div class="profile-menu">
-            <a href="#" class="profile-menu-item">Mənim Elanlarım <span>➔</span></a>
-            <a href="#" class="profile-menu-item">Seçilmişlər <span>➔</span></a>
-            <a href="#" class="profile-menu-item">Tənzimləmələr <span>➔</span></a>
-            <a href="#" class="profile-menu-item logout">Hesabdan Çıx <span>➔</span></a>
+        <div class="auth-box" id="registerForm" style="display: none;">
+            <h2 class="auth-title">Qeydiyyat</h2>
+            <div class="input-group">
+                <label>E-poçt</label>
+                <input type="email" id="regEmail" placeholder="ad@mail.com">
+            </div>
+            <div class="input-group">
+                <label>Şifrə</label>
+                <input type="password" id="regPassword" placeholder="Ən az 6 simvol">
+            </div>
+            <button class="auth-btn" id="btnToRegister" style="background-color: var(--gold); color: #000;">Qeydiyyatı Tamamla</button>
+            <div class="auth-switch">
+                Artıq hesabınız var? <span onclick="toggleAuth()">Daxil olun</span>
+            </div>
+        </div>
+
+        <div class="profile-box" id="profileDashboard" style="display: none;">
+            <div class="profile-avatar" id="userAvatar">U</div>
+            <h2 id="userEmail" style="font-size: 18px; margin-bottom: 5px;">istifadeci@mail.com</h2>
+            <p style="color: var(--text-muted); font-size: 14px;">Xoş gəlmisiniz!</p>
+            <button class="auth-btn logout-btn" id="btnLogout">Hesabdan Çıx</button>
         </div>
     </main>
 
     <nav class="bottom-nav">
-        <a href="profil.html" class="nav-item active">
-            <span class="nav-icon">👤</span>Profil
-        </a>
-        <a href="mesajlar.html" class="nav-item">
-            <span class="nav-icon">💬</span>Mesajlar
-        </a>
-        <a href="elan.html" class="nav-item">
-            <span class="nav-icon">➕</span>Elan ver
-        </a>
-        <a href="index.html" class="nav-item">
-            <span class="nav-icon">🏠</span>Əsas
-        </a>
+        <a href="profil.html" class="nav-item active"><span class="nav-icon">👤</span>Profil</a>
+        <a href="mesajlar.html" class="nav-item"><span class="nav-icon">💬</span>Mesajlar</a>
+        <a href="elan.html" class="nav-item"><span class="nav-icon">➕</span>Elan ver</a>
+        <a href="index.html" class="nav-item"><span class="nav-icon">🏠</span>Əsas</a>
     </nav>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { 
+            getAuth, 
+            createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword, 
+            signOut, 
+            onAuthStateChanged,
+            GoogleAuthProvider,
+            signInWithPopup
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // DIQQƏT: BURANI ÖZ MƏLUMATLARINLA DOLDURMALISAN!
+        const firebaseConfig = {
+            apiKey: "BAYAQLI_API_KEY_BURA_YAZILIR",
+            authDomain: "BAYAQLI_AUTH_DOMAIN_BURA_YAZILİR",
+            projectId: "BAYAQLI_PROJECT_ID_BURA_YAZİLİR",
+            storageBucket: "BAYAQLI_STORAGE_BUCKET_BURA_YAZİLİR",
+            messagingSenderId: "BAYAQLI_SENDER_ID_BURA_YAZİLİR",
+            appId: "BAYAQLI_APP_ID_BURA_YAZİLİR"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const googleProvider = new GoogleAuthProvider();
+
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const profileDashboard = document.getElementById('profileDashboard');
+        const userEmail = document.getElementById('userEmail');
+        const userAvatar = document.getElementById('userAvatar');
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'none';
+                profileDashboard.style.display = 'block';
+                userEmail.innerText = user.email || user.displayName;
+                userAvatar.innerText = (user.email || user.displayName).charAt(0).toUpperCase();
+            } else {
+                profileDashboard.style.display = 'none';
+                loginForm.style.display = 'block';
+            }
+        });
+
+        document.getElementById('btnToRegister').addEventListener('click', () => {
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(() => alert("Qeydiyyat uğurludur!"))
+                .catch(err => alert("Xəta: " + err.message));
+        });
+
+        document.getElementById('btnToLogin').addEventListener('click', () => {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => alert("Giriş edildi!"))
+                .catch(err => alert("Xəta: " + err.message));
+        });
+
+        document.getElementById('btnGoogleLogin').addEventListener('click', () => {
+            signInWithPopup(auth, googleProvider)
+                .then(() => alert("Google ilə giriş uğurludur!"))
+                .catch(err => alert("Xəta: " + err.message));
+        });
+
+        document.getElementById('btnLogout').addEventListener('click', () => {
+            signOut(auth).then(() => alert("Hesabdan çıxıldı."));
+        });
+    </script>
+
+    <script>
+        function toggleAuth() {
+            const login = document.getElementById('loginForm');
+            const register = document.getElementById('registerForm');
+            if (login.style.display === 'none') {
+                login.style.display = 'block';
+                register.style.display = 'none';
+            } else {
+                login.style.display = 'none';
+                register.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>
