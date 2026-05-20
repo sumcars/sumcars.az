@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SumCars | Profil</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #D4AF37; 
@@ -144,14 +144,15 @@
             signInWithPopup
         } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // Birbaşa sənin Firebase panelindən götürülmüş orijinal kodlar:
+        // Firebase panelindəki real və doğru konfiqurasiya kodları:
         const firebaseConfig = {
             apiKey: "AIzaSyDZLMA1RsZisr3SVq2uuh3zz37IlKMn_c0",
             authDomain: "login-aac3b.firebaseapp.com",
             projectId: "login-aac3b",
             storageBucket: "login-aac3b.firebasestorage.app",
             messagingSenderId: "1176951786527",
-            appId: "1:176951786527:web:082ba7470b16f44141292a"
+            appId: "1:176951786527:web:082ba7470b16f44141292a",
+            measurementId: "G-SNTV097PK9"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -172,7 +173,7 @@
                 userEmail.innerText = user.email || user.displayName;
                 userAvatar.innerText = (user.email || user.displayName).charAt(0).toUpperCase();
             } else {
-                profileDashboard.style.display = 'block';
+                loginForm.style.display = 'block';
                 registerForm.style.display = 'none';
                 profileDashboard.style.display = 'none';
             }
