@@ -144,7 +144,7 @@
             signInWithPopup
         } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // SƏNİN PROYEKTOVA ÖZƏL FIREBASE KODLARI ARTIQ BURADADIR!
+        // Birbaşa sənin Firebase panelindən götürülmüş orijinal kodlar:
         const firebaseConfig = {
             apiKey: "AIzaSyDZLMA1RsZisr3SVq2uuh3zz37IlKMn_c0",
             authDomain: "login-aac3b.firebaseapp.com",
@@ -172,8 +172,9 @@
                 userEmail.innerText = user.email || user.displayName;
                 userAvatar.innerText = (user.email || user.displayName).charAt(0).toUpperCase();
             } else {
+                profileDashboard.style.display = 'block';
+                registerForm.style.display = 'none';
                 profileDashboard.style.display = 'none';
-                loginForm.style.display = 'block';
             }
         });
 
@@ -181,6 +182,8 @@
             const email = document.getElementById('regEmail').value;
             const password = document.getElementById('regPassword').value;
             
+            if(!email || !password) { alert("Zəhmət olmasa bütün xanaları doldurun!"); return; }
+
             createUserWithEmailAndPassword(auth, email, password)
                 .then(() => alert("Qeydiyyat uğurludur!"))
                 .catch(err => alert("Xəta: " + err.message));
@@ -189,6 +192,8 @@
         document.getElementById('btnToLogin').addEventListener('click', () => {
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
+
+            if(!email || !password) { alert("Zəhmət olmasa bütün xanaları doldurun!"); return; }
 
             signInWithEmailAndPassword(auth, email, password)
                 .then(() => alert("Giriş edildi!"))
