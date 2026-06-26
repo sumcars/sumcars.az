@@ -2,204 +2,255 @@
 <html lang="az">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SumCars | Ana Səhifə</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SumCars - Peşəkar Avtomobil Satışı və İcarəsi</title>
     <style>
+        /* --- ƏSAS RƏNGLƏR VƏ PARAMETRLƏR --- */
         :root {
-            --gold: #D4AF37; 
-            --bg-white: #ffffff; 
-            --light-gray: #f8f9fa; 
-            --border-color: #e0e0e0; 
-            --text-dark: #1a1a1a; 
-            --text-muted: #6c757d; 
+            --bg-color: #0d0d0d;
+            --primary-gold: #D4AF37;
+            --text-white: #ffffff;
+            --dark-gray: #1a1a1a;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth; /* Səhifədə sürüşkən aşağı düşmək üçün */
+        }
 
-        body { background-color: var(--bg-white); color: var(--text-dark); padding-bottom: 80px; }
-        a { text-decoration: none; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
 
-        /* YUXARI REKLAM - TAM EKRANA YAYILMASI ÜÇÜN DÜZƏLİŞ EDİLDİ */
-        .top-banner {
+        /* --- ANİMASİYALAR --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- BAŞLIQ (NAVBAR) --- */
+        nav {
+            position: fixed;
+            top: 0;
             width: 100%;
-            height: 100px; 
-            background-color: #000;
+            background: rgba(13, 13, 13, 0.9);
+            padding: 20px 50px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border-bottom: 3px solid var(--gold);
-            margin-bottom: 5px; 
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        .top-banner img {
+        nav .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* --- ƏSAS EKRAN (HERO SECTION) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 0 20px;
+            animation: fadeIn 1s ease-in-out;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0d0d0d 100%);
+        }
+
+        .main-card {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            background-color: var(--dark-gray);
+            border: 2px solid var(--primary-gold);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-gold);
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+            cursor: pointer;
+        }
+
+        .main-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.4);
+            background-color: var(--primary-gold);
+            color: var(--bg-color);
+        }
+
+        /* --- BÖLMƏLƏR --- */
+        section {
+            min-height: 80vh;
+            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 36px;
+            color: var(--primary-gold);
+            margin-bottom: 40px;
+        }
+
+        .action-btn {
+            background-color: var(--primary-gold);
+            color: var(--bg-color);
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .action-btn:hover {
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        /* --- XƏRİTƏ VƏ ÜNVAN --- */
+        .map-container {
+            width: 100%;
+            max-width: 1000px;
+            height: 400px;
+            border: 2px solid var(--primary-gold);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        iframe {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* BU HİSSƏ DƏYİŞDİRİLDİ: Şəkil artıq qıraqlarda boşluq qoymayacaq */
+            border: none;
         }
 
-        /* Üst Panel (Header) */
-        header {
-            background-color: var(--light-gray);
-            padding: 15px; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 2px solid var(--gold);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            min-height: 70px;
-        }
-        .header-logo { position: absolute; left: 15px; height: 50px; width: auto; }
-        header h1 { color: var(--text-dark); font-weight: 800; letter-spacing: -1px; font-size: 24px; }
-
-        /* Elanlar Siyahısı */
-        .feed { padding: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .car-card { background-color: var(--light-gray); border-radius: 12px; overflow: hidden; position: relative; border: 1px solid var(--border-color); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .car-img { width: 100%; height: 140px; object-fit: cover; }
-        .price-tag { background: var(--gold); color: #fff; position: absolute; top: 100px; left: 0; padding: 4px 10px; font-weight: 800; font-size: 14px; border-radius: 0 8px 8px 0; }
-        .car-info { padding: 10px; }
-        .car-model { font-weight: 600; font-size: 15px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-dark); }
-        .car-meta { font-size: 12px; color: var(--text-muted); }
-
-        /* SOLDAKI 5-Lİ REKLAM PƏNCƏRƏSİ (300x300) */
-        .ad-box {
-            position: fixed;
-            left: 10px;
-            bottom: 85px;
-            width: 150px;  
-            height: 150px; 
-            background: var(--light-gray);
-            border: 4px solid var(--gold);
-            border-radius: 20px;
-            padding: 5px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-            z-index: 3000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--dark-gray);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid var(--primary-gold);
         }
 
-        .ad-close {
-            position: absolute;
-            top: -12px;
-            right: -12px;
-            background: #ff4d4d;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border: 3px solid white;
-            z-index: 3100;
-        }
-
-        .ad-content { 
-            display: none; 
-            width: 100%; 
-            height: 100%; 
-            animation: adFade 0.6s ease-in-out; 
+        .admin-link {
+            display: block;
+            margin-top: 20px;
+            color: #444;
+            text-decoration: none;
+            font-size: 12px;
+            transition: 0.3s;
         }
         
-        .ad-content.active { 
-            display: flex; 
+        .admin-link:hover {
+            color: var(--primary-gold);
         }
 
-        @keyframes adFade {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+        /* --- POP-UP (MODAL) ARXAPLAN --- */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
         }
 
-        .ad-content img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            border-radius: 15px; 
+        /* MOBİL UYĞUNLUQ */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; height: auto; padding-top: 150px; padding-bottom: 50px; }
+            nav { padding: 20px; flex-direction: column; gap: 15px; }
+            nav ul { flex-wrap: wrap; justify-content: center; }
         }
-
-        /* Alt Naviqasiya Paneli */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background-color: var(--light-gray); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid var(--border-color); z-index: 2000; }
-        .nav-item { text-align: center; color: var(--text-muted); font-size: 10px; flex: 1; transition: 0.2s; }
-        .nav-item.active { color: var(--gold); transform: scale(1.05); }
-        .nav-icon { font-size: 20px; display: block; margin-bottom: 4px; }
     </style>
 </head>
 <body>
 
-    <div class="top-banner">
-        <img src="mainreklam.jpg" alt="Main Reklam">
-    </div>
-
-    <header>
-        <img src="LOGO.png" alt="Logo" class="header-logo">
-        <h1>SUMCARS</h1>
-    </header>
-
-    <main class="feed">
-        <div class="car-card">
-            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=400" class="car-img">
-            <div class="price-tag">45 500 AZN</div>
-            <div class="car-info">
-                <div class="car-model">BMW 5 Series</div>
-                <div class="car-meta">2018 il • 2.0 L • 120 000 km</div>
-            </div>
-        </div>
-        
-        <div class="car-card">
-            <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=400" class="car-img">
-            <div class="price-tag">82 000 AZN</div>
-            <div class="car-info">
-                <div class="car-model">Mercedes-Benz E-Class</div>
-                <div class="car-meta">2020 il • 2.0 L • 45 000 km</div>
-            </div>
-        </div>
-    </main>
-
-    <div class="ad-box" id="mainAdBox">
-        <div class="ad-close" onclick="document.getElementById('mainAdBox').style.display='none'">✖</div>
-        
-        <div class="ad-content active" id="ad1"><img src="reklam1.jpg"></div>
-        <div class="ad-content" id="ad2"><img src="reklam2.jpg"></div>
-        <div class="ad-content" id="ad3"><img src="reklam3.jpg"></div>
-        <div class="ad-content" id="ad4"><img src="reklam4.jpg"></div>
-        <div class="ad-content" id="ad5"><img src="reklam5.jpg"></div>
-        <div class="ad-content" id="ad5"><img src="reklam6.jpg"></div
-    </div>
-
-    <nav class="bottom-nav">
-        <a href="profil.html" class="nav-item">
-            <span class="nav-icon">👤</span>Profil
-        </a>
-        <a href="mesajlar.html" class="nav-item">
-            <span class="nav-icon">💬</span>Mesajlar
-        </a>
-        <a href="elan.html" class="nav-item">
-            <span class="nav-icon">➕</span>Elan ver
-        </a>
-        <a href="index.html" class="nav-item active">
-            <span class="nav-icon">🏠</span>Əsas
-        </a>
+    <nav>
+        <a href="#" class="logo">SumCars</a>
+        <ul>
+            <li><a href="#add-car">Maşın Əlavə Et</a></li>
+            <li><a href="#location">Ünvan</a></li>
+            <li><a href="#contact">Əlaqə & Dəstək</a></li>
+        </ul>
     </nav>
 
-    <script>
-        let currentAd = 1;
-        const totalAds = 5;
+    <header class="hero" id="home">
+        <a href="rent.html" class="main-card">Rent a Car</a>
+        <a href="cars.html" class="main-card">Avtomobil Satışı</a>
+    </header>
 
-        setInterval(() => {
-            const currentElem = document.getElementById(`ad${currentAd}`);
-            if (currentElem) currentElem.classList.remove('active');
-            
-            currentAd = currentAd % totalAds + 1;
-            
-            const nextElem = document.getElementById(`ad${currentAd}`);
-            if (nextElem) nextElem.classList.add('active');
-        }, 10000);
+    <section id="add-car">
+        <h2>Yeni Avtomobil Əlavə Et</h2>
+        <p style="margin-bottom: 30px; max-width: 600px;">Avtomobilinizi saytımıza yerləşdirmək üçün aşağıdakı düyməyə klikləyərək məlumatları və şəkilləri göndərin.</p>
+        <button class="action-btn" onclick="openModal()">Maşın Əlavə Et</button>
+    </section>
+
+    <section id="location">
+        <h2>Ünvanımız</h2>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.428490145636!2d49.86709231535451!3d40.3771908793697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d077c61fef3%3A0xfa4594c97092ca01!2sBaku%2C%20Azerbaijan!5e0!3m2!1sen!2s!4v1625000000000!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Bizimlə Əlaqə və Dəstək</h2>
+        <p>Email: info@sumcars.az</p>
+        <p>Tel: +994 50 000 00 00</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 SumCars. Bütün hüquqlar qorunur.</p>
+        <a href="admin.html" class="admin-link">Admin Girişi</a>
+    </footer>
+
+    <div id="addCarModal" class="modal">
+        </div>
+
+    <script>
+        // Pop-up-ı açmaq üçün sadə funksiya
+        function openModal() {
+            alert("Növbəti addımda burada məlumat doldurma və şəkil yükləmə pəncərəsi (Pop-up) açılacaq!");
+            // document.getElementById('addCarModal').style.display = 'block'; (Form hazır olanda bunu aktiv edəcəyik)
+        }
     </script>
 
 </body>
