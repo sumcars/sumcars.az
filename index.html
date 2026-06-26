@@ -349,6 +349,70 @@
                 closeModal();
             }
         }
+
+        // Bura BotFather-in verdiyi Tokeni yaz
+        const TELEGRAM_BOT_TOKEN = 'SENIN_TOKENIN_BURA_YAZILACAQ'; 
+        // Bura @userinfobot-un verdiyi ID-ni yaz
+        const TELEGRAM_CHAT_ID = 'SENIN_CHAT_ID_BURA_YAZILACAQ'; 
+
+        document.getElementById('addCarForm').addEventListener('submit', async function(e) {
+            e.preventDefault(); // Səhifənin yenilənməsinin qarşısını alır
+            
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "Göndərilir... Gözləyin";
+            btn.disabled = true;
+
+            // Formdakı məlumatları toplayırıq
+            const brand = document.getElementById('carBrand').value;
+            const model = document.getElementById('carModel').value;
+            const year = document.getElementById('carYear').value;
+            const km = document.getElementById('carKm').value;
+            const problem = document.getElementById('carProblem').value;
+            const extra = document.getElementById('carExtra').value;
+            const photos = document.getElementById('carPhotos').files;
+
+            // Şəkil sayını yoxlayırıq
+            if (photos.length < 5) {
+                alert("Zəhmət olmasa qalereyadan ən azı 5 şəkil seçin!");
+                btn.innerText = "Məlumatları Göndər";
+                btn.disabled = false;
+                return;
+            }
+
+            // Telegram-a gedəcək mətn
+            const message = `🚘 Yeni Maşın Təklifi:\n\n📌 Marka: ${brand}\n📌 Model: ${model}\n📅 İl: ${year}\n🛣 Yürüş: ${km} km\n⚠️ Problem: ${problem}\n📝 Əlavə: ${extra}`;
+
+            try {
+                // Əvvəlcə mətni göndəririk
+                await fetch(`https://api.telegram.org/bot${8705081095:AAE5AO92DUo9AfbUupvjxTpeMj4wFsg4NmY}/sendMessage`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message })
+                });
+
+                // Sonra qalereyadan seçilən şəkilləri bir-bir göndəririk
+                for (let i = 0; i < photos.length; i++) {
+                    let formData = new FormData();
+                    formData.append('chat_id', 7766487634);
+                    formData.append('photo', photos[i]);
+                    
+                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                }
+
+                alert("Məlumatlar uğurla göndərildi! Telegramınızı yoxlayın.");
+                closeModal();
+                document.getElementById('addCarForm').reset();
+            } catch (error) {
+                alert("Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.");
+                console.error(error);
+            } finally {
+                btn.innerText = "Məlumatları Göndər";
+                btn.disabled = false;
+            }
+        });
     </script>
 
 </body>
