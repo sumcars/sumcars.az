@@ -200,6 +200,70 @@
             nav { padding: 20px; flex-direction: column; gap: 15px; }
             nav ul { flex-wrap: wrap; justify-content: center; }
         }
+
+        /* --- POP-UP DİZAYNI --- */
+        .modal-content {
+            background-color: var(--dark-gray);
+            margin: 5% auto;
+            padding: 30px;
+            border: 2px solid var(--primary-gold);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: fadeIn 0.4s;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            color: var(--text-white);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            color: red;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        #addCarForm input, #addCarForm textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background-color: #0d0d0d;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        #addCarForm input:focus, #addCarForm textarea:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+        }
+
+        .file-label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--primary-gold);
+            font-size: 14px;
+        }
+
+        #carPhotos {
+            border: none;
+            background: transparent;
+            padding: 0;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -242,14 +306,48 @@
         <a href="admin.html" class="admin-link">Admin Girişi</a>
     </footer>
 
+    <!-- POP-UP (MODAL) PƏNCƏRƏ -->
     <div id="addCarModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 style="color: var(--primary-gold); margin-bottom: 20px;">Maşın Məlumatları</h2>
+            <form id="addCarForm">
+                <div class="input-group">
+                    <input type="text" id="carBrand" placeholder="Marka (məs: BMW)" required>
+                    <input type="text" id="carModel" placeholder="Model (məs: F30)" required>
+                </div>
+                <div class="input-group">
+                    <input type="number" id="carYear" placeholder="İl" required>
+                    <input type="number" id="carKm" placeholder="Yürüş (km)" required>
+                </div>
+                <input type="text" id="carProblem" placeholder="Problemi (yoxdursa 'Yoxdur' yazın)" required>
+                <textarea id="carExtra" rows="3" placeholder="Əlavə məlumat..." required></textarea>
+                
+                <label for="carPhotos" class="file-label">Qalereyadan şəkil seçin (Ən az 5 şəkil)</label>
+                <input type="file" id="carPhotos" accept="image/*" multiple required>
+                
+                <button type="submit" class="action-btn" style="width: 100%; margin-top: 15px;" id="submitBtn">Məlumatları Göndər</button>
+            </form>
+        </div>
+    </div>
         </div>
 
     <script>
-        // Pop-up-ı açmaq üçün sadə funksiya
+       const modal = document.getElementById('addCarModal');
+
         function openModal() {
-            alert("Növbəti addımda burada məlumat doldurma və şəkil yükləmə pəncərəsi (Pop-up) açılacaq!");
-            // document.getElementById('addCarModal').style.display = 'block'; (Form hazır olanda bunu aktiv edəcəyik)
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Pəncərədən kənara basanda bağlansın deyə
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
         }
     </script>
 
