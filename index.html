@@ -333,7 +333,7 @@
         </div>
 
     <script>
-       const modal = document.getElementById('addCarModal');
+        const modal = document.getElementById('addCarModal');
 
         function openModal() {
             modal.style.display = 'block';
@@ -350,10 +350,9 @@
             }
         }
 
-        // Bura BotFather-in verdiyi Tokeni yaz
-        const TELEGRAM_BOT_TOKEN = 'SENIN_TOKENIN_BURA_YAZILACAQ'; 
-        // Bura @userinfobot-un verdiyi ID-ni yaz
-        const TELEGRAM_CHAT_ID = 'SENIN_CHAT_ID_BURA_YAZILACAQ'; 
+        // Token və Chat ID-ni bura əlavə etdim (Dırnaq işarələri mütləqdir!)
+        const TELEGRAM_BOT_TOKEN = '8705081095:AAE5AO92DUo9AfbUupvjxTpeMj4wFsg4NmY'; 
+        const TELEGRAM_CHAT_ID = '7766487634'; 
 
         document.getElementById('addCarForm').addEventListener('submit', async function(e) {
             e.preventDefault(); // Səhifənin yenilənməsinin qarşısını alır
@@ -383,8 +382,8 @@
             const message = `🚘 Yeni Maşın Təklifi:\n\n📌 Marka: ${brand}\n📌 Model: ${model}\n📅 İl: ${year}\n🛣 Yürüş: ${km} km\n⚠️ Problem: ${problem}\n📝 Əlavə: ${extra}`;
 
             try {
-                // Əvvəlcə mətni göndəririk
-                await fetch(`https://api.telegram.org/bot${8705081095:AAE5AO92DUo9AfbUupvjxTpeMj4wFsg4NmY}/sendMessage`, {
+                // Əvvəlcə mətni göndəririk (Burada artıq TELEGRAM_BOT_TOKEN avtomatik oxunur)
+                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message })
@@ -393,7 +392,7 @@
                 // Sonra qalereyadan seçilən şəkilləri bir-bir göndəririk
                 for (let i = 0; i < photos.length; i++) {
                     let formData = new FormData();
-                    formData.append('chat_id', 7766487634);
+                    formData.append('chat_id', TELEGRAM_CHAT_ID);
                     formData.append('photo', photos[i]);
                     
                     await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
@@ -414,6 +413,5 @@
             }
         });
     </script>
-
 </body>
 </html>
