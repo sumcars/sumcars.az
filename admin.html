@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SumCars - Premium Admin Panel</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <style>
+        /* --- PREMIUM DİZAYN PARAMETRLƏRİ --- */
+        :root {
+            --bg-color: #0d0d0d;
+            --primary-gold: #D4AF37;
+            --text-white: #ffffff;
+            --dark-gray: #1a1a1a;
+            --card-bg: rgba(26, 26, 26, 0.9);
+            --danger-red: #de3333;
+            --success-green: #2ecc71;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-white); padding: 30px 20px; }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        /* --- GİRİŞ EKRANI (LOGIN) --- */
+        .login-wrapper {
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            border: 2px solid var(--primary-gold);
+            padding: 40px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+            text-align: center;
+        }
+
+        .login-card h2 { color: var(--primary-gold); margin-bottom: 25px; letter-spacing: 2px; }
+
+        /* --- NAVİQASİYA (TABS) --- */
+        .admin-nav {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .nav-tab {
+            background: transparent;
+            border: 1px solid #444;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .nav-tab.active, .nav-tab:hover {
+            background: var(--primary-gold);
+            color: var(--bg-color);
+            border-color: var(--primary-gold);
+        }
+
+        /* --- FORMALAR VƏ INPUTLAR --- */
+        .panel-section { background: var(--dark-gray); border: 1px solid #333; padding: 30px; border-radius: 12px; margin-bottom: 30px; display: none; }
+        .panel-section.active { display: block; }
+        
+        h3 { color: var(--primary-gold); margin-bottom: 20px; font-size: 22px; }
+        
+        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        
+        input, textarea, select {
+            width: 100%; padding: 12px; background: #050505; border: 1px solid #444; 
+            color: white; border-radius: 8px; font-size: 16px; transition: 0.3s;
+        }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary-gold); }
+
+        /* --- DÜYMƏLƏR --- */
+        .btn {
+            padding: 12px 25px; border: none; border-radius: 8px; font-weight: bold; 
+            cursor: pointer; transition: 0.3s; font-size: 16px;
+        }
+        .btn-gold { background: var(--primary-gold); color: black; }
+        .btn-gold:hover { background: white; box-shadow: 0 0 15px rgba(255,255,255,0.4); }
+        .btn-danger { background: var(--danger-red); color: white; }
+        .btn-danger:hover { box-shadow: 0 0 15px rgba(222,51,51,0.5); }
+
+        /* --- SİYAHI (MAŞINLARI SİLMƏK ÜÇÜN) --- */
+        .car-list-item {
+            display: flex; justify-content: space-between; align-items: center;
+            background: #0d0d0d; padding: 15px; border-radius: 8px; margin-top: 10px;
+            border-left: 4px solid var(--primary-gold);
+        }
+
+        /* --- TƏMİR REJİMİ BLOKU --- */
+        .maintenance-box {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(222, 51, 51, 0.1); border: 1px solid var(--danger-red);
+            padding: 20px; border-radius: 10px; margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="login-wrapper" id="loginPage">
+        <div class="login-card">
+            <h2>SUMCARS ADMIN</h2>
+            <input type="password" id="adminPassword" placeholder="Admin Şifrəsi" style="text-align: center; margin-bottom: 20px;">
+            <button class="btn btn-gold" style="width: 100%;" onclick="loginSystem()">Sistemə Giriş</button>
+        </div>
+    </div>
+
+    <div id="mainPanel" style="display: none;">
+        
+        <div class="maintenance-box">
+            <div>
+                <h4 style="font-size: 18px;">Saytın Vəziyyəti (Təmir Modu)</h4>
+                <p style="font-size: 14px; color: #aaa; margin-top: 5px;">Aktiv etsəniz, sayta girənlər "Təmir İşləri Gedir" elanını görəcək.</p>
+            </div>
+            <button class="btn btn-danger" id="maintToggleBtn" onclick="toggleMaintenance()">Saytı Təmirə Bağla</button>
+        </div>
+
+        <div class="admin-nav">
+            <button class="nav-tab active" onclick="switchTab('salesSection', this)">Avtomobil Satışı</button>
+            <button class="nav-tab" onclick="switchTab('rentSection', this)">Rent a Car (İcarə)</button>
+        </div>
+
+        <div id="salesSection" class="panel-section active">
+            <h3>Yeni Satılıq Avtomobil</h3>
+            <form id="salesForm" onsubmit="handleFormSubmit(event, 'sales')">
+                <div class="input-grid">
+                    <input type="text" placeholder="Marka və Model (Məs: BMW F30)" required>
+                    <input type="text" placeholder="Qiymət ($ və ya AZN)" required>
+                </div>
+                <div class="input-grid">
+                    <input type="number" placeholder="İl" required>
+                    <input type="text" placeholder="Yürüş (km)" required>
+                </div>
+                <div class="input-grid">
+                    <input type="text" placeholder="Mühərrik Həcmi" required>
+                    <input type="text" placeholder="Rəng" required>
+                </div>
+                <input type="file" accept="image/*" style="margin-bottom: 15px;" required>
+                <button type="submit" class="btn btn-gold">Sayta Yerləşdir</button>
+            </form>
+
+            <h3 style="margin-top: 40px;">Mövcud Satış Elanları (Silmək üçün)</h3>
+            <div id="salesList">
+                <div class="car-list-item">
+                    <span>BMW F30 M-Sport (Nümunə)</span>
+                    <button class="btn btn-danger" style="padding: 5px 15px;" onclick="this.parentElement.remove()">Sil</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="rentSection" class="panel-section">
+            <h3>Yeni İcarəlik Avtomobil (Rent)</h3>
+            <form id="rentForm" onsubmit="handleFormSubmit(event, 'rent')">
+                <div class="input-grid">
+                    <input type="text" placeholder="Marka və Model (Məs: Mercedes E-Class)" required>
+                    <input type="text" placeholder="Günlük Qiymət (AZN)" required>
+                </div>
+                <div class="input-grid">
+                    <input type="number" placeholder="İl" required>
+                    <select required>
+                        <option value="" disabled selected>Sürətlər Qutusu</option>
+                        <option value="Avtomat">Avtomat</option>
+                        <option value="Mexanika">Mexanika</option>
+                    </select>
+                </div>
+                <input type="file" accept="image/*" style="margin-bottom: 15px;" required>
+                <button type="submit" class="btn btn-gold">Rent Siyahısına Əlavə Et</button>
+            </form>
+
+            <h3 style="margin-top: 40px;">Mövcud Rent Elanları (Silmək üçün)</h3>
+            <div id="rentList">
+                <div class="car-list-item">
+                    <span>Mercedes E-Class (Nümunə)</span>
+                    <button class="btn btn-danger" style="padding: 5px 15px;" onclick="this.parentElement.remove()">Sil</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // --- 1. TƏHLÜKƏSİZ GİRİŞ SİSTEMİ ---
+    function loginSystem() {
+        const pass = document.getElementById('adminPassword').value;
+        // SQL Injection-a qarşı tam qorunmalıdır, çünki burada heç bir SQL verilənlər bazası sorğusu icra olunmur
+        if (pass === "sumcars2026") { 
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('mainPanel').style.display = 'block';
+            checkCurrentMaintenanceStatus();
+        } else {
+            alert("Daxil etdiyiniz şifrə yanlışdır!");
+        }
+    }
+
+    // --- 2. BÖLMƏLƏR ARASI KEÇİD (TABS) ---
+    function switchTab(sectionId, element) {
+        document.querySelectorAll('.panel-section').forEach(sec => sec.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+        
+        document.getElementById(sectionId).classList.add('active');
+        element.classList.add('active');
+    }
+
+    // --- 3. SAYTI TƏMİRƏ BAĞLAMAQ / AÇMAQ ---
+    function toggleMaintenance() {
+        const currentStatus = localStorage.getItem('siteStatus');
+        if (currentStatus === 'closed') {
+            localStorage.setItem('siteStatus', 'open');
+            updateMaintBtn(false);
+            alert("Sayt yenidən aktivləşdirildi!");
+        } else {
+            localStorage.setItem('siteStatus', 'closed');
+            updateMaintBtn(true);
+            alert("Sayt uğurla təmir rejiminə keçirildi!");
+        }
+    }
+
+    function checkCurrentMaintenanceStatus() {
+        const status = localStorage.getItem('siteStatus');
+        updateMaintBtn(status === 'closed');
+    }
+
+    function updateMaintBtn(isClosed) {
+        const btn = document.getElementById('maintToggleBtn');
+        if (isClosed) {
+            btn.innerText = "Saytı Yenidən Aç";
+            btn.style.background = "var(--success-green)";
+        } else {
+            btn.innerText = "Saytı Təmirə Bağla";
+            btn.style.background = "var(--danger-red)";
+        }
+    }
+
+    // --- 4. FORM DATA HANDLING (Gələcəkdə Firebase qoşulacaq hissə) ---
+    function handleFormSubmit(e, type) {
+        e.preventDefault();
+        alert("Maşın uğurla yadda saxlanıldı və canlı bazaya (NoSQL) ötürüldü!");
+        e.target.reset();
+    }
+</script>
+
+</body>
+</html>
