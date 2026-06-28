@@ -153,17 +153,13 @@
                     <input type="text" placeholder="Mühərrik Həcmi" required>
                     <input type="text" placeholder="Rəng" required>
                 </div>
-                <input type="file" accept="image/*" style="margin-bottom: 15px;" required>
+                <input type="file" id="salesImage" accept="image/*" style="margin-bottom: 15px;" required>
                 <button type="submit" class="btn btn-gold">Sayta Yerləşdir</button>
             </form>
 
             <h3 style="margin-top: 40px;">Mövcud Satış Elanları (Silmək üçün)</h3>
             <div id="salesList">
-                <div class="car-list-item">
-                    <span>BMW F30 M-Sport (Nümunə)</span>
-                    <button class="btn btn-danger" style="padding: 5px 15px;" onclick="this.parentElement.remove()">Sil</button>
                 </div>
-            </div>
         </div>
 
         <div id="rentSection" class="panel-section">
@@ -181,17 +177,13 @@
                         <option value="Mexanika">Mexanika</option>
                     </select>
                 </div>
-                <input type="file" accept="image/*" style="margin-bottom: 15px;" required>
+                <input type="file" id="rentImage" accept="image/*" style="margin-bottom: 15px;" required>
                 <button type="submit" class="btn btn-gold">Rent Siyahısına Əlavə Et</button>
             </form>
 
             <h3 style="margin-top: 40px;">Mövcud Rent Elanları (Silmək üçün)</h3>
             <div id="rentList">
-                <div class="car-list-item">
-                    <span>Mercedes E-Class (Nümunə)</span>
-                    <button class="btn btn-danger" style="padding: 5px 15px;" onclick="this.parentElement.remove()">Sil</button>
                 </div>
-            </div>
         </div>
 
     </div>
@@ -201,7 +193,6 @@
     // --- 1. TƏHLÜKƏSİZ GİRİŞ SİSTEMİ ---
     function loginSystem() {
         const pass = document.getElementById('adminPassword').value;
-        // SQL Injection-a qarşı tam qorunmalıdır, çünki burada heç bir SQL verilənlər bazası sorğusu icra olunmur
         if (pass === "sumcars2026") { 
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('mainPanel').style.display = 'block';
@@ -250,11 +241,11 @@
         }
     }
 
-    // --- 4. FORM DATA HANDLING (Gələcəkdə Firebase qoşulacaq hissə) ---
+    // --- 4. FORM DATA HANDLING ---
     function handleFormSubmit(e, type) {
         e.preventDefault();
-        alert("Maşın uğurla yadda saxlanıldı və canlı bazaya (NoSQL) ötürüldü!");
-        e.target.reset();
+        // Bura Firebase kodları gələcək
+        console.log(type + " üçün məlumatlar bazaya göndərilməyə hazırdır.");
     }
 </script>
 
