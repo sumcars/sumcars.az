@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
+    <script>
+        const status = localStorage.getItem('siteStatus');
+        
+        if(status === 'closed') {
+            document.documentElement.innerHTML = '<body style="background:#0d0d0d; color:#D4AF37; display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; text-align:center; flex-direction:column;"><h1>Sayt Hazırda Təmirdədir 🛠️</h1><p style="color:white; margin-top:10px;">Texniki işlərlə əlaqədar saytımız müvəqqəti bağlıdır.</p></body>';
+            throw new Error("Sayt təmirdədir.");
+        } 
+        else if (status === 'soon') {
+            document.documentElement.innerHTML = '<body style="background:#0d0d0d; color:#D4AF37; display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; text-align:center; flex-direction:column;"><h1>Tezliklə Xidmətinizdəyik 🚀</h1><p style="color:white; margin-top:10px;">Yeni avtomobillər və yenilənmiş dizaynla çox yaxında buradayıq!</p></body>';
+            throw new Error("Sayt tezliklə açılacaq.");
+        }
+        // Eğer 'open' ise hiçbir şey yapmaz, site normal açılır.
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SumCars - Peşəkar Avtomobil Satışı və İcarəsi</title>
